@@ -28,3 +28,37 @@ $ git-filter-repo --analyze
 ```bash
 $ PACKAGE_MANAGER install git-filter-repo
 ```
+
+## Cambiar el autor de los commits
+
+Para cambiar el autor de todos los commits de un repositorio, se puede utilizar el siguiente comando:
+
+```bash
+$ git-filter-repo --mailmap mailmap.txt
+```
+
+Donde:
+
+- `mailmap.txt` (puede tener cualquier nombre) es un archivo que contiene el mapeo de los autores originales a los autores nuevos, con el siguiente formato:
+
+```
+Nombre Autor Correcto <correo_autor_correcto@email.com> Nombre Autor Incorrecto <correo_autor_incorrecto@email.com>
+```
+
+Si al ejecutar el comando se rechaza el cambio en el historial de commits, se puede forzar el cambio con la opción `--force`.
+
+```bash
+$ git-filter-repo --mailmap mailmap.txt --force
+```
+
+- NOTA: Si le aparece un eror como:
+
+```bash
+$ fatal: replace depth too high for object b769532341677b7c34b5adeb85a173daa0ced852
+```
+
+Puede solucionarlo con el siguiente comando:
+
+```bash
+$ git replace -d b769532341677b7c34b5adeb85a173daa0ced852
+```
